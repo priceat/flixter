@@ -15,6 +15,8 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'figaro'
 gem "fog", "~> 1.3.1"
+gem 'mini_magick'
+gem 'will_paginate', '~> 3.0.5'
 group :doc do
   gem 'sdoc', require: false
 end
