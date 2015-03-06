@@ -34,7 +34,7 @@
     <% end %>
       </div>
    <div class="col-xs-12">
-    <% @course.sections.each do |section| %>
+    <% @course.sections.rank(:row_order).each do |section| %>
       <br />
       <div class="section">
         <h3>
@@ -55,5 +55,9 @@
         <br class="clr" />
       </div>
     <% end %>
+  </div>
+</br>
+  <div class="btn-pad">
+<%= link_to 'Back to Courses', courses_path, :class => 'btn btn-success btn-pad' %>
   </div>
 </div>
