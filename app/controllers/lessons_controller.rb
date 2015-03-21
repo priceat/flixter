@@ -1,14 +1,8 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_in_course
   
   def show
-    course = current_lesson.section.course
-    if current_user.enrolled_in?(course)
-     render current_lesson
-    else
-      flash[:alert] = "You Must Be Enrolled to See Lessons"
-      redirect_to course_path(course)
-    end
   end
 
   private
@@ -16,5 +10,11 @@ class LessonsController < ApplicationController
   helper_method :current_lesson
   def current_lesson
     @current_lesson ||= Lesson.find(params[:id])
+  end
+
+  def require_in_course
+    if !current_lesson.section.course.user.enrolled_courses.include?(current_lesson.section.course) 
+      redirect_to course_path(current_lesson.section.course), :alert => "You cannot access this course if you are not enrolled."
+    end
   end
 end
